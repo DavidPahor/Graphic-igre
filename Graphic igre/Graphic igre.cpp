@@ -3,7 +3,7 @@
 #include "graphics.h"
 using namespace std;
 
-void sah(int x) 
+void sah(float x) 
 {
 	initwindow(x, x, "Sah");
 
@@ -25,25 +25,21 @@ void sah(int x)
 	}
 }
 
-void ljuti(int x)
+void ljuti(float x)
 {
 
-	float p1, pom, rv, rm;
+	float p1, pom, rv, rm, kp;
 	pom = (1.0 / 3) * x;//360
 	p1 = pom / 2;//180
 	rv = p1 / 2;
 	rm = rv / 4;
+	kp = ((x / 2)) / 6;
 
 	initwindow(x, x, "Covjece ne ljuti se");
 	setbkcolor(WHITE);
 	cleardevice();
+	setcolor(BLACK);
 
-	for (float i = 0; i < 8; i++)
-	{
-		setcolor(BLACK);
-		line(i / 3.0 * (x), 0, i / 3.0 * (x), x);
-		line(0, i / 3.0 * (x), x, i / 3.0 * (x));
-	}
 	circle(p1, p1, rv);
 	circle(p1 + pom * 2, p1, rv);
 	circle(p1 + pom * 2, p1 + pom * 2, rv);
@@ -54,22 +50,22 @@ void ljuti(int x)
 	fillellipse(p1 + rv / 2.5, (p1 + pom * 2) - rv / 2.5, rm, rm);
 	fillellipse(p1 + rv / 2.5, (p1 + pom * 2) + rv / 2.5, rm, rm);
 	fillellipse(p1 - rv / 2.5, (p1 + pom * 2) + rv / 2.5, rm, rm);//krug
-	//fillellipse(450, 990, 30, 30);
-	//for (int i = 1; i < 5; i++)
-	//{
-	//	fillellipse(540, 540 + (i * 90), 30, 30);//kuca
-	//}
+	fillellipse(x / 2 - kp, (x / 2) + (5 * kp), rm, rm);
+	for (int i = 1; i < 5; i++)
+	{
+		fillellipse(x/2, (x/2) + (i * kp), rm, rm);//kuca
+	}
 
 	setfillstyle(SOLID_FILL, RED);
 	fillellipse((p1 + pom * 2) - rv / 2.5, (p1 + pom * 2) - rv / 2.5, rm, rm);
 	fillellipse((p1 + pom * 2) + rv / 2.5, (p1 + pom * 2) - rv / 2.5, rm, rm);
 	fillellipse((p1 + pom * 2) + rv / 2.5, (p1 + pom * 2) + rv / 2.5, rm, rm);
 	fillellipse((p1 + pom * 2) - rv / 2.5, (p1 + pom * 2) + rv / 2.5, rm, rm);//krug
-	//fillellipse(990, 630, 30, 30);
-	//for (int i = 1; i < 5; i++)
-	//{
-	//	fillellipse(540 + (i * 90), 540 , 30, 30);//kuca
-	//}
+	fillellipse(x / 2 + (5 * kp), (x / 2) +kp, rm, rm);
+	for (int i = 1; i < 5; i++)
+	{
+		fillellipse(x / 2 + (i * kp), (x / 2), rm, rm);//kuca
+	}
 
 
 	setfillstyle(SOLID_FILL, BLUE);
@@ -77,11 +73,11 @@ void ljuti(int x)
 	fillellipse((p1 + pom * 2) + rv / 2.5, p1 - rv / 2.5, rm, rm);
 	fillellipse((p1 + pom * 2) + rv / 2.5, p1 + rv / 2.5, rm, rm);
 	fillellipse((p1 + pom * 2) - rv / 2.5, p1 + rv / 2.5, rm, rm);//krug
-	//fillellipse(630, 90, 30, 30);
-	//for (int i = 1; i < 5; i++)
-	//{
-	//	fillellipse(540 , 540 - (i * 90), 30, 30);//kuca
-	//}
+	fillellipse(x / 2 + kp, (x / 2) - (5 * kp), rm, rm);
+	for (int i = 1; i < 5; i++)
+	{
+		fillellipse(x / 2, (x / 2) - (i * kp), rm, rm);//kuca
+	}
 
 
 	setfillstyle(SOLID_FILL, YELLOW);
@@ -89,27 +85,25 @@ void ljuti(int x)
 	fillellipse(p1 + rv / 2.5, p1 - rv / 2.5, rm, rm);
 	fillellipse(p1 + rv / 2.5, p1 + rv / 2.5, rm, rm);
 	fillellipse(p1 - rv / 2.5, p1 + rv / 2.5, rm, rm);//krug
-	//fillellipse(90, 450, 30, 30);
-	//for (int i = 1; i < 5; i++)
-	//{
-	//	fillellipse(540 - (i * 90), 540 , 30, 30);//kuca
-	//}
+	fillellipse(x / 2 - (5 * kp), (x / 2) - kp, rm, rm);
+	for (int i = 1; i < 5; i++)
+	{
+		fillellipse(x / 2 - (i * kp), (x / 2), rm, rm);//kuca
+	}
 
-	//for (int i = 0; i < 11; i++) 
-	//{
-	//	circle(90 + (i * 90), 540-90, 30);
-	//	circle(90 + (i * 90), 540 +90, 30);
-	//	circle(540 + 90 , 90 + (i * 90), 30);
-	//	circle(540 - 90 , 90 + (i * 90), 30);
-	//}
-	//for (int i = 0; i < 11; i++)
+	for (int i = 0; i < 11; i++) 
+	{
+		circle(kp + (i * kp), x/2-kp, rm);
+		circle(kp + (i * kp), x / 2 + kp, rm);
+		circle(x / 2 - kp, kp + (i * kp), rm);
+		circle(x / 2 + kp, kp + (i * kp), rm);
+	}
+	for (int i = 0; i < 11; i++)
 
-	//circle(90, 540, 30);
-	//circle(540, 90, 30);
-	//circle(540, 990, 30);
-	//circle(990, 540, 30);
-
-
+	circle(x / 2 - (5 * kp), (x / 2), rm);
+	circle(x / 2 + (5 * kp), (x / 2), rm);
+	circle(x / 2, (x / 2) - (5 * kp), rm);
+	circle(x / 2, (x / 2) + (5 * kp), rm);
 }
 
 void mlin(int x)
@@ -157,8 +151,8 @@ void pacificshores()
 
 int main()
 {
-	int x,y;
-	//x = 1080;
+	float x,y;
+	//x = 500;
 	char z;
 	cout << "Upisi rezoluciju:";
 	cin >> x >> z >> y;
