@@ -106,62 +106,100 @@ void ljuti(float x)
 	circle(x / 2, (x / 2) + (5 * kp), rm);
 }
 
-void mlin(int x)
+void mlin(float x)
 {
-	initwindow(1080, 1080, "Mlin");
+	float raz = x / 7;
+	float r = raz/15;
+	initwindow(x, x, "Mlin");
 	setbkcolor(WHITE);
 	cleardevice();
 
 	setcolor(BLACK);
-	rectangle(30, 30, 1050, 1050);
-	rectangle(30+ 180, 30+ 180, 1050- 180, 1050- 180);
-	rectangle(30 + 180*2, 30 + 180 * 2, 1050 - 180 * 2, 1050 - 180 * 2);
 
-	line(30, 540, 390, 540);
-	line(690, 540, 1050, 540);
-	
-	line(540, 30, 540, 390);
-	line(540, 690, 540, 1050);
+	for (int i = 1; i < 4; i++) 
+	{
+		rectangle(raz*i, raz * i, x- raz * i, x- raz * i);
 
-	setfillstyle(SOLID_FILL, BLACK);
-	fillellipse(30,30,10,10);
+		setfillstyle(SOLID_FILL, BLACK);
+		fillellipse(raz * i, raz * i, r, r);
+		fillellipse(raz * i, x - raz * i, r, r);
+		fillellipse(x-raz * i, raz * i, r, r);
+		fillellipse(x-raz * i, x - raz * i, r, r);
 
+		fillellipse(raz * i, x / 2, r, r);
+		fillellipse(x-raz * i, x / 2, r, r);
+		fillellipse(x/2, raz * i, r, r);
+		fillellipse(x/2, x - raz * i, r, r);
+	}
+	line(raz, x / 2, raz * 3, x / 2);
+	line(raz*4, x / 2, raz * 6, x / 2);
+	line(x/2, raz, x / 2, raz * 3);
+	line(x / 2, raz*4, x / 2, raz * 6);
 
 }
 
-void pacificshores() 
+void pacificshores(float x)
 {
-	initwindow(1080, 1080, "Pacific shores");
+	float p1, pom, pom1 = 0, pom2, raz1,raz,raz2,raz3;
+	raz = x / 13;
+	pom = (1.0 / 3) * x;//360
+	p1 = pom / 2;//180
+
+	initwindow(x, x, "Pacific shores");
 	setbkcolor(WHITE);
 	cleardevice();
+	setcolor(BLACK);
 
-	int points[] = {
-	100, 100,
-	200, 100,
-	150, 200
-	};
-
-
-	for (int i = 0; i < 12; i++) 
+	for (int i = 0; i < 13; i++)
 	{
-		setfillstyle(SOLID_FILL, RED);
-		fillpoly(3, points);
+		raz1 = raz * i;
+		raz2 = raz * (i + 1);
+		raz3 = raz1 + (raz / 2);
+		if (i != 6) {
+			int points[] = {
+				raz1, 0,
+				raz2, 0,
+				raz3, pom
+			};
+
+			int points2[] = {
+				raz1, x,
+				raz2, x,
+				raz3, pom * 2
+			};
+			if (i % 2 == 1)
+				setfillstyle(SOLID_FILL, RED);
+			else
+				setfillstyle(SOLID_FILL, BLACK);
+			fillpoly(3, points);
+
+			if (i % 2 == 0)
+				setfillstyle(SOLID_FILL, RED);
+			else
+				setfillstyle(SOLID_FILL, BLACK);
+			fillpoly(3, points2);
+		}
+		else 
+		{
+			setfillstyle(SOLID_FILL, BROWN);
+			bar(raz1, 0, raz2, 1080);
+		}
 	}
 }
 
 int main()
 {
 	float x,y;
-	//x = 500;
+	//x = 1080;
 	char z;
 	cout << "Upisi rezoluciju:";
 	cin >> x >> z >> y;
 	if (x > y)
 		x = y;
-	//sah(x);
+	sah(x);
 	ljuti(x);
-	//mlin();
-	//pacificshores();
+	mlin(x);
+	pacificshores(x);
 
 	getch();
 	closegraph();
