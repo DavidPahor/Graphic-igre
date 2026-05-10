@@ -192,7 +192,7 @@ int main()
 	float x,y;
 	//x = 1080;
 	char z;
-	cout << "Upisi rezoluciju:";
+	cout << "Upisi velicinu:";
 	cin >> x >> z >> y;
 	if (x > y)
 		x = y;
